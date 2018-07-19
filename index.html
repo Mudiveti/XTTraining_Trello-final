@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/ui-lightness/jquery-ui.css"/>
+	<link rel="stylesheet" type="text/css" href="index.css">
+	<!-- <script type="text/javascript" src="/index.js"></script> -->
+
+
+	<title>Trello</title>
+
+</head>
+<body>
+	<header>
+		<div class="text-center pt-2">
+			<img src="logo.png">
+		</div>
+	</header>
+
+	<div class="container btn-muted">
+		<div class="row">
+			<div class="col-lg-2 text-center column_1"> 
+				<div class="btn-group-vertical left_buttons">
+					<button type="button" class="btn btn-primary nav-button">Home</button>
+					<button type="button" class="btn btn-primary nav-button">Dashboards</button>
+					<button type="button" class="btn btn-primary nav-button" data-toggle="modal" data-target="#myModal">
+						Create board
+					</button>
+
+					<div class="modal fade" id="myModal">
+						<div class="modal-dialog modal-sm">
+							<div class="modal-content">
+								<div class="modal-body">
+									<form class="form-inline" role="form">
+										<input type="text" class="form-control mb-2 mr-sm-2 dashboard-input" id="dashboard-input-id" placeholder="name.." value="">
+
+									</form>
+								</div>
+
+								<div class="modal-footer">
+									<button type="button" class="btn btn-primary createBoard" onclick="">Submit</button>
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-10  column_2">
+				<div class="container">
+					<div class="d-flex pl-5">
+						<i class="fa fa-user pt-1"></i>
+						<h5>Personal Boards</h5>
+					</div>
+					<ul id="list" class="card-columns">
+					<!-- 	<li class="card text-center bg-success" >
+							<div class="card-body">
+								<h6><a href="/board.html?name=Dashboard2">Dashboard2</a></h6>
+								</div>
+							</li> -->
+							<!-- <li class="card text-center bg-success" >
+								<div class="card-body">
+									<h6><a href="/board.html?name=Dashboard1">Dashboard1</a></h6>
+								</div>
+							</li>
+							<li class="card text-center bg-success" >
+								<div class="card-body">
+									<h6><a href="/board.html?name=Dashboard3">Dashboard3</a></h6>
+								</div>
+							</li> -->
+							
+						</div>
+					</ul>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+
+</body>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+<script type="text/javascript">	
+
+	$(document).ready(function(){
+/*
+		$.ajax ({
+			type: "GET",
+			url: "http://localhost:3000/boards",
+			success: function(data)
+			{
+				$.each(data, function(i, board) {
+
+					createBoard(board.id,board.boardName);
+
+				});
+			}
+		});
+*/
+/*
+		$(".createBoard").click(function(){
+			var boardId ='';
+			var name = document.getElementById('dashboard-input-id').value;
+
+
+			$.ajax ({
+				type: "GET",
+				url: "http://localhost:3000/boards",
+				success: function(data)
+				{
+					boardId = data.length+1;
+
+					$.ajax ({
+						type: "POST",
+						url: "http://localhost:3000/boards/",
+						data:"id="+boardId+"&subListId=0&boardName="+name,
+						dataType: 'json',
+						success: function(data)
+						{
+
+							createBoard(boardId,name);
+						}
+					});	         
+
+
+				}
+			});     	
+
+		});*/
+
+		$(".createBoard").click(function(){
+			var name = document.getElementById('dashboard-input-id').value;
+          createBoard('1',name);
+
+		});
+
+
+	});
+
+
+	function createBoard(boardId,name){
+
+		var ul = document.getElementById('list');
+		var li = document.createElement('li');
+		li.className='card text-center';
+
+		var div = document.createElement("div");
+		div.className='card-body bg-success';
+		var h6 = document.createElement("h6");
+		var a = document.createElement("a");
+		a.setAttribute('href',"board.html?boardName="+name+"&boardId="+boardId);
+		a.innerHTML=name;
+		h6.appendChild(a);
+		div.appendChild(h6);
+		li.appendChild(div);
+		ul.appendChild(li);
+
+		$('#myModal').modal('hide');
+		document.getElementById('dashboard-input-id').value='';
+	}
+	
+</script>
+</html>

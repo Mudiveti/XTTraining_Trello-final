@@ -1,0 +1,100 @@
+body{
+	background-color: rgb(14, 158, 12);
+
+
+}
+header{
+	background-color: rgb(23, 140, 21);
+
+}
+h1{
+	font-family: sans-serif;
+	padding-left: 20px;
+}
+h5{
+	padding-left: 20px;
+}
+h6{
+
+    height: 27px;
+    padding-top: 3px;
+}
+
+.rename_div{
+	    padding-left: 6px;
+}
+.form-control {width:120px;}
+.popover {max-width:300px;}
+
+#listName{
+width: 100%;
+}
+
+.card-columns{
+	  /*  max-width: 202px;*/
+	  column-gap: 5.25rem;
+}
+
+.show {
+  list-style: none;
+ /* height: 0;*/
+  line-height: 2em;
+  margin: 0;
+ /* padding: 0 0.5em;*/
+  overflow: hidden;
+  width: 100%;
+  /*background-color: white;*/
+  color: black;
+}
+
+.list_item_button{
+	width: 100%;
+}
+
+li.show {
+  height: 2.4em;
+  margin: 9px 0;
+}
+
+.add-to-list,.edit-list{
+
+    width: 100%;
+}
+
+.list{
+	padding: 0px;
+}
+
+.sort{
+	list-style: none;
+	    background: #C2C6BF;
+	        padding: 14px;
+
+}
+
+.itemInput{
+	width: 100%;
+}
+.itemname{
+	width: 208px;
+    height: 36px;
+}
+
+.addbutton{
+    height: 33px;
+    
+    margin-bottom: 3px;
+    padding-bottom: 29px;
+}
+.addList{
+	width: 219px;
+}
+
+.card{
+	   position: inherit;
+}
+
+@media (max-width: 640px)
+.card-columns {
+    column-count: 2;
+}

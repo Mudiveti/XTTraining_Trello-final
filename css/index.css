@@ -1,0 +1,66 @@
+
+body{
+	background-color: aliceblue;
+}
+header{
+	    background: #026aa7;
+	    height: 43px;
+}
+h4{
+	    padding-left: 35px;
+}
+.left_buttons .nav-button {
+	 background-color: aliceblue;
+    border: none;
+    font-weight: bold;
+    color: black;
+}
+
+.nav-button:hover {
+    -ms-transform: scale(1.5); /* IE 9 */
+    -webkit-transform: scale(1.5); /* Safari 3-8 */
+    transform: scale(1.5); 
+    background-color: rgba(12, 25, 38, 0.1);
+}
+
+h5{
+	    padding-left: 6px;
+}
+h6{
+	    color: white;
+}
+a{
+	list-style: none;
+	 color: white;
+}
+a:hover{
+	color: white;
+
+}
+
+#list li{
+	max-width: 160px;
+	    border: none;
+	        background-color: aliceblue;
+}
+
+.column_1{
+	    padding-top: 35px;
+}
+.column_2{
+	padding-top: 32px;
+}
+.form_div{
+	    padding-left: 131px;
+}
+
+.modal-content{
+	 background-image: url("../img/dashboard.jpeg");
+}
+#dashboard-input-id{
+	width: 100%;
+}
+/*.card-columns{
+	column-count: 4;
+
+}*/
