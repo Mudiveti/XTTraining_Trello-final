@@ -16,35 +16,35 @@ h5{
 }
 h6{
 
-    height: 27px;
-    padding-top: 3px;
+	height: 27px;
+	padding-top: 3px;
 }
 
 .rename_div{
-	    padding-left: 6px;
+	padding-left: 6px;
 }
 .form-control {width:120px;}
 .popover {max-width:300px;}
 
 #listName{
-width: 100%;
+	width: 100%;
 }
 
 .card-columns{
-	  /*  max-width: 202px;*/
-	  column-gap: 5.25rem;
+	/*  max-width: 202px;*/
+	column-gap: 5.25rem;
 }
 
 .show {
-  list-style: none;
- /* height: 0;*/
-  line-height: 2em;
-  margin: 0;
- /* padding: 0 0.5em;*/
-  overflow: hidden;
-  width: 100%;
-  /*background-color: white;*/
-  color: black;
+	list-style: none;
+	/* height: 0;*/
+	line-height: 2em;
+	margin: 0;
+	/* padding: 0 0.5em;*/
+	overflow: hidden;
+	width: 100%;
+	/*background-color: white;*/
+	color: black;
 }
 
 .list_item_button{
@@ -52,13 +52,17 @@ width: 100%;
 }
 
 li.show {
-  height: 2.4em;
-  margin: 9px 0;
+	height: 2.4em;
+	margin: 9px 0;
 }
 
 .add-to-list,.edit-list{
 
-    width: 100%;
+	width: 100%;
+}
+.edit-list{
+	font-size: larger;
+    font-family: sans-serif;
 }
 
 .list{
@@ -67,8 +71,8 @@ li.show {
 
 .sort{
 	list-style: none;
-	    background: #C2C6BF;
-	        padding: 14px;
+	background: #C2C6BF;
+	padding: 14px;
 
 }
 
@@ -77,24 +81,33 @@ li.show {
 }
 .itemname{
 	width: 208px;
-    height: 36px;
+	height: 36px;
 }
 
+/*.default-li{
+	list-style: none;
+}*/
+
+.list-group-item {
+     background-color: #C2C6BF;
+     border: none; 
+    }
+
 .addbutton{
-    height: 33px;
-    
-    margin-bottom: 3px;
-    padding-bottom: 29px;
+	height: 33px;
+
+	margin-bottom: 3px;
+	padding-bottom: 29px;
 }
 .addList{
 	width: 219px;
 }
 
 .card{
-	   position: inherit;
+	position: inherit;
 }
 
 @media (max-width: 640px)
 .card-columns {
-    column-count: 2;
+	column-count: 2;
 }
