@@ -1,56 +1,11 @@
+//localStorage.clear();
+
 var listName = '';
 var deleteListName = '';
 var params = getParams();
+var board;
 $(document).ready(function() {
-
-    /*
-    	$.ajax ({
-    		type: "GET",
-    		url: "http://localhost:3000/subList?id="+params.boardId,
-    		success: function(data)
-    		{
-
-    			document.getElementById('dashBoardId').innerHTML=params.boardName;
-    			var ul1 = document.getElementById('ulId');
-
-    			$.each(data.subListArray, function(i, sublist) {
-
-    					var li1 = document.createElement("li");
-    					li1.className='card sort';
-    					li1.innerHTML='<div type="button" class="btn text-left edit-list" data-toggle="modal" data-target="#myModal">'+sublist.subListName+'</div><div class="modal fade" id="myModal"><div class="modal-dialog modal-sm"><div class="modal-content"><div class="modal-header"><h4 class="modal-title">Edit</h4><button type="button" class="close" data-dismiss="modal">&times;</button></div><div class="modal-body"><form class="form-inline" role="form"><input type="text" class="form-control mb-2 mr-sm-2" placeholder="name.."></form></div><div class="modal-footer"><button type="button" class="btn btn-danger" data-dismiss="modal" onclick="deleteListName()">Delete</button><button type="button" class="btn btn-primary" onclick="changeListName(this">Submit</button><button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button></div></div></div></div>';
-    					var ul2 = document.createElement("ul");
-    					ul2.className='list sortableList';
-                          
-
-                         $.ajax ({
-    			                 type: "GET",
-    			                 url: "http://localhost:3000/items?subListId="+sublist.subListId,
-    			                 success: function(data)
-    			                   {
-    			                     	$.each(data.items, function(i, item) {
-    						            var li2 = document.createElement("li");
-    						            li2.className='btn bg-light text-left list_item_button show';
-    						            li2.innerHTML=item.itemName;
-    						            ul2.appendChild(li2);
-
-    					                 });
-    			                   }
-    		             });
-
-    					li1.appendChild(ul2);
-    					li1.innerHTML=li1.innerHTML+'<div  class="itemInput"><input type="text" placeholder="list name..." class="itemname" maxlength="40"><button type="button" class="btn btn-primary ml-1 addbutton" onclick="return addItem(this)">Add</button></div>';
-    					ul1.appendChild(li1);
-    			
-    			});
-    		}
-    	});
-
-    	*/
-
-
-
-
-    document.getElementById('dashBoardId').innerHTML = params;
+    /*document.getElementById('dashBoardId').innerHTML = params.boardName;
     var data = [{
         "boardName": "Dashboard1",
         "boardId": "Id1",
@@ -66,242 +21,340 @@ $(document).ready(function() {
                 "itemListName": "List3",
                 "items": ["Item31", "Item32", "Item33"]
             }
-            /*,
-            		{
-            			"itemListName": "List1",
-            			"items": ["Item1", "Item2", "Item3"]
-            		},
-            		{
-            			"itemListName": "List1",
-            			"items": ["Item1", "Item2", "Item3"]
-            		},
-            		{
-            			"itemListName": "List1",
-            			"items": ["Item1", "Item2", "Item3"]
-            		}*/
         ]
     }];
+    */
 
-    $.each(data, function(i, item) {
-        document.getElementById('dashBoardId').innerHTML = item.boardName;
-        var ul1 = document.getElementById('ulId');
-        $.each(item.itemList, function(i, list) {
-            var li1 = document.createElement("li");
-            li1.className = 'card sort';
-            li1.innerHTML = '<div type="button" class="btn text-left edit-list" data-toggle="modal" data-target="#myModal">' + list.itemListName + '</div><div class="modal fade" id="myModal"><div class="modal-dialog modal-sm"><div class="modal-content"><div class="modal-header"><h4 class="modal-title">Edit</h4><button type="button" class="close" data-dismiss="modal">&times;</button></div><div class="modal-body"><form class="form-inline" role="form"><input type="text" class="form-control mb-2 mr-sm-2" placeholder="name.." ></form></div><div class="modal-footer"><button type="button" class="btn btn-danger" data-dismiss="modal" onclick="deleteListName()">Delete</button><button type="button" class="btn btn-primary" onclick="changeListName(this)">Submit</button><button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button></div></div></div></div>';
-            var ul2 = document.createElement("ul");
-            ul2.className = 'list sortableList';
+    board = JSON.parse(localStorage.getItem(params.boardId));
+    document.getElementById('dashBoardId').innerHTML = board.boardName;
+    var ul1 = document.getElementById('ulId');
+    $.each(board.boardList, function(i, list) {
+    	var li1 = document.createElement("li");
+    	li1.className = 'card sort';
+    	li1.innerHTML = '<div type="button" class="btn text-left edit-list" data-toggle="modal" data-target="#myModal">' + list.listName + '</div><div class="modal fade" id="myModal"><div class="modal-dialog modal-sm"><div class="modal-content"><div class="modal-header"><h4 class="modal-title">Edit</h4><button type="button" class="close" data-dismiss="modal">&times;</button></div><div class="modal-body"><form class="form-inline" role="form"><input type="text" class="form-control mb-2 mr-sm-2" placeholder="name.." ></form></div><div class="modal-footer"><button type="button" class="btn btn-danger" data-dismiss="modal" onclick="deleteListName()">Delete</button><button type="button" class="btn btn-primary" onclick="changeListName(this)">Submit</button><button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button></div></div></div></div>';
+    	var ul2 = document.createElement("ul");
+    	ul2.className = 'list sortableList';
 
-            var li3 = document.createElement("li");
-            li3.className='list-group-item';
-            var i=0;
+    	var li3 = document.createElement("li");
+    	li3.className='list-group-item';
+    	var i=0;
+    	var itemLength = list.items.length;
+    	if(itemLength === 0){
+    		var li2 = document.createElement("li");
+    		ul2.appendChild(li3);
+    	}
 
-            $.each(list.items, function(i, item) {
-                var li2 = document.createElement("li");
-                 
-                li2.className = 'btn bg-light text-left list_item_button show';
-                li2.innerHTML = item;
-                if(i==0){
-                	ul2.appendChild(li3);
-                	i=1;
-                }
-                
-                ul2.appendChild(li2);
+    	$.each(list.items, function(i, item) {
+    		var li2 = document.createElement("li");
 
-            });
-            /* ul2.appendChild(li3);*/
-            li1.appendChild(ul2);
-            li1.innerHTML = li1.innerHTML + '<div  class="itemInput"><input type="text" placeholder="list name..." class="itemname" maxlength="40"><button type="button" class="btn btn-primary ml-1 addbutton" onclick="return addItem(this)">Add</button></div>';
-            ul1.appendChild(li1);
-        });
+    		li2.className = 'btn bg-light text-left list_item_button show';
+    		li2.innerHTML = item.itemName;
+    		li2.id =item.itemId;
+    		if(i==0){
+    			ul2.appendChild(li3);
+    			i=1;
+    		}
 
+    		ul2.appendChild(li2);
+
+    	});
+    	/* ul2.appendChild(li3);*/
+    	li1.appendChild(ul2);
+    	li1.innerHTML = li1.innerHTML + '<div  class="itemInput"><input type="text" placeholder="list name..." class="itemname" maxlength="40"><button type="button" class="btn btn-primary ml-1 addbutton" onclick="return addItem(this)">Add</button></div>';
+    	ul1.appendChild(li1);
     });
-
-
-
-    //$('ul').droppable();
-
 
     //li droppable
     $('#ulId ul').sortable({
-        revert: 'invalid',
-        connectWith: ".sort ul",
-        items: "li.show "
+    	revert: 'invalid',
+    	connectWith: ".sort ul",
+    	items: "li.show "
     });
 
 
     //drag&drop ul
     $(".sortableList").sortable({
-        revert: true,
-        /*update: function (event, ui) {
-            // Some code to prevent duplicates
-        }*/
+    	revert: true,
+    	update: function( event, ui ) {
+
+    		var list = [];  
+    		for(var i=0;i<$(".edit-list").length;i++){
+    			var listNm = $(".edit-list")[i].innerHTML;
+
+    			for(j=0;j<board.boardList.length;j++){
+    				if(listNm === board.boardList[j].listName){
+    					list.push(board.boardList[j]);
+    				}
+    			}
+    		}
+
+    		for(var i=0;i<list.length;i++) {
+    			board.boardList[i] = list[i];
+    		}
+
+    		localStorage.removeItem(board.boardId);
+    		localStorage.setItem(board.boardId,JSON.stringify(board));
+
+
+       /* for(var i = 0 ; i < $(".sort").length ; i++){
+        	var itemArray = [];
+        	var items = board.boardList[i].items;
+        	var li = $(".sort")[i].children[2].children;
+        	for(var j=0;j < li.length ; j++){
+        		for(var k=0;k<items.length;k++){
+                    if(li[j].innerHTML===items[k].itemName){
+                        itemArray.push(items[k]);
+                    }
+        		}
+        	}           
+           for(var k=0;k< itemArray.length;k++){   
+               board.boardList[i].items[k]=itemArray[k];  
+           }
+
+       }*/
+       for(var i = 0 ; i < $(".sort").length ; i++){
+       	var itemArray = [];
+       	var items = board.boardList[i].items;
+       	var li = $(".sort")[i].children[2].children;
+
+       	for(var j=0;j < li.length ; j++){
+       		var name = li[j].innerHTML;
+       		if(name!=''){
+       			var id = li[j].id;
+       			var item ={
+       				itemId:id,
+       				itemName:name
+       			};
+
+       			itemArray.push(item);
+       		}
+
+       	}
+       	board.boardList[i].items = [];
+       	for(var k=0;k< itemArray.length;k++){   
+       		board.boardList[i].items[k]=itemArray[k];  
+       	}  
+
+       }           
+
+       localStorage.removeItem(board.boardId);
+       localStorage.setItem(board.boardId,JSON.stringify(board));
+
+   }
+});
+
+
+    $( ".sortableList" ).droppable({
+    	drop: function( event, ui ) {
+    	}
+
     });
-    /*	$(".draggable").draggable({
-    		connectToSortable: '.sortableList',
-    		cursor: 'pointer',
-    		helper: 'clone',
-    		revert: 'invalid'
-    	});*/
+
 
 
     $("[data-toggle=popover]").popover({
-        html: true,
-        content: function() {
-            return $('#popover-content').html();
-        }
+    	html: true,
+    	content: function() {
+    		return $('#popover-content').html();
+    	}
     });
     $("[data-toggle=popoverAddList]").popover({
-        html: true,
-        content: function() {
-            return $('#popover-content-addlist').html();
-        }
+    	html: true,
+    	content: function() {
+    		return $('#popover-content-addlist').html();
+    	}
     });
 
 
     $('.rename_div').click(function(event) {
-        $(".popover").css("display", "block");
+    	$(".popover").css("display", "block");
 
     });
 
     $('.rename_list').on('keydown', function(e) {
 
-        var name = $(this).text();
-        if (e.which === 13 && e.shiftKey === false) {
-            $(this).css('background-color', '');
-            $('.rename_list').attr('contenteditable', 'false');
+    	var name = $(this).text();
+    	if (e.which === 13 && e.shiftKey === false) {
+    		$(this).css('background-color', '');
+    		$('.rename_list').attr('contenteditable', 'false');
 
-            return false;
-        }
+    		return false;
+    	}
     });
 
     $('h6').click(function(event) {
 
-        $(this).css('background-color', 'white');
-        $(this).attr('contenteditable', 'true');
-        $(this).focus();
+    	$(this).css('background-color', 'white');
+    	$(this).attr('contenteditable', 'true');
+    	$(this).focus();
     });
 
     $("h6").blur(function() {
 
-        $(this).css('background-color', '');
-        $('.rename_list').attr('contenteditable', 'false');
+    	$(this).css('background-color', '');
+    	$('.rename_list').attr('contenteditable', 'false');
     });
 
     $("[data-toggle=popover-add-item]").popover({
-        html: true,
-        content: function() {
-            return $('#popover-content-add-item').html();
-        }
+    	html: true,
+    	content: function() {
+    		return $('#popover-content-add-item').html();
+    	}
     });
 
 
     $(".form-control").blur(function() {
-        listName = $(this).val();
-        $(this).val() = '';
+    	listName = $(this).val();
+    	$(this).val() = '';
 
     });
 
 
     $(".edit-list").click(function() {
-        deleteListName = $(this)[0].innerHTML;
+    	deleteListName = $(this)[0].innerHTML;
 
     });
 
 
     $(".btn-danger").click(function() {
-        alert(deleteListName);
+    	for(var i=0;i<$('.sort').length;i++){
+
+    		if($('.sort')[i].children[0].innerHTML === deleteListName){
+                 $('.sort')[i].className = 'd-none';
+    		}
+    	}
+    	var listArray = [];
+    	for(var j =0;j<board.boardList.length;j++){
+    		if(board.boardList[j].listName != deleteListName){
+    			listArray.push(board.boardList[j]);
+    		}
+    	}
+    	board.boardList=listArray;
+
+       localStorage.removeItem(board.boardId);
+       localStorage.setItem(board.boardId,JSON.stringify(board));
 
     });
 });
 
 function addItem(e) {
+	var itemIdTemp = 0;
+	var listName = e.parentElement.parentElement.children[0].innerHTML;
+	var item = e.parentElement.children[0].value;
+	$('.itemname').val('');
 
-    var item = e.parentElement.children[0].value;
-    var ul = e.parentElement.parentElement.children[2];
-    var li = document.createElement("li");
-    li.className = 'btn bg-light text-left list_item_button show';
-    li.innerHTML = item;
-    ul.appendChild(li);
-    $('.itemname').val('');
+	for( var i=0;i<board.boardList.length;i++){
+
+		if(board.boardList[i].listName===listName){
+			var itemId = board.boardList[i].items.length+1;
+			itemIdTemp = itemId;
+			var addItem ={
+				itemId:itemId,
+				itemName:item
+			};
+			board.boardList[i].items.push(addItem);
+		}
+	}
+	localStorage.setItem(board.boardId,JSON.stringify(board));
+
+	var ul = e.parentElement.parentElement.children[2];
+	var li = document.createElement("li");
+	li.className = 'btn bg-light text-left list_item_button show';
+	li.innerHTML = item;
+	li.id=itemIdTemp;
+	ul.appendChild(li);
 }
 
 function renameboard(e) {
-    var boardname2 = e.parentElement.children[0].value;
-    document.getElementById('dashBoardId').textContent = boardname2;
-    $(".popover").css("display", "none");
+	var boardname2 = e.parentElement.children[0].value;
+	document.getElementById('dashBoardId').textContent = boardname2;
+	board.boardName = boardname2;
+	localStorage.removeItem(board.boardId);
+	localStorage.setItem(board.boardId,JSON.stringify(board));
+   // gBoardName = boardname2;
+
+   $(".popover").css("display", "none");
 }
 
 function addList(e) {
 
-    var boardname2 = e.parentElement.children[0].value;
-    var li = document.createElement('li');
-    li.className = ' card sort ';
-    li.innerHTML = ' <div type="button" class="btn text-left edit-list" data-toggle="modal" data-target="#myModal">' + boardname2 + '</div><div class="modal fade" id="myModal"><div class="modal-dialog modal-sm"><div class="modal-content"><div class="modal-header"><h4 class="modal-title">Edit</h4><button type="button" class="close" data-dismiss="modal">&times;</button></div><div class="modal-body"><form class="form-inline" role="form"><input type="text" class="form-control mb-2 mr-sm-2" placeholder="name.."></form></div><div class="modal-footer"><button type="button" class="btn btn-danger" data-dismiss="modal">Delete</button><button type="button" class="btn btn-primary">Submit</button><button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button></div></div></div></div><ul class="list sortableList ui-sortable"><li class="list-group-item"></li></ul><div  class="itemInput"><input type="text" placeholder="list name..." class="itemname" maxlength="40"><button type="button" class="btn btn-primary ml-1 addbutton" onclick="return addItem(this)">Add</button></div>';
-    var ul = document.getElementById('ulId');
-    ul.appendChild(li);
+	var listName = e.parentElement.children[0].value;
+	var li = document.createElement('li');
+	li.className = ' card sort ';
+	li.innerHTML = ' <div type="button" class="btn text-left edit-list" data-toggle="modal" data-target="#myModal">' + listName + '</div><div class="modal fade" id="myModal"><div class="modal-dialog modal-sm"><div class="modal-content"><div class="modal-header"><h4 class="modal-title">Edit</h4><button type="button" class="close" data-dismiss="modal">&times;</button></div><div class="modal-body"><form class="form-inline" role="form"><input type="text" class="form-control mb-2 mr-sm-2" placeholder="name.."></form></div><div class="modal-footer"><button type="button" class="btn btn-danger" data-dismiss="modal">Delete</button><button type="button" class="btn btn-primary">Submit</button><button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button></div></div></div></div><ul class="list sortableList ui-sortable"><li class="list-group-item"></li></ul><div  class="itemInput"><input type="text" placeholder="list name..." class="itemname" maxlength="40"><button type="button" class="btn btn-primary ml-1 addbutton" onclick="return addItem(this)">Add</button></div>';
+	var ul = document.getElementById('ulId');
+	ul.appendChild(li);
 
-    $('#ulId ul').sortable({
-        revert: 'invalid',
-        connectWith: ".sort ul",
-        items: "li.show "
-    });
-
-    $(".sortableList").sortable({
-        revert: true,
+	$('#ulId ul').sortable({
+		revert: 'invalid',
+		connectWith: ".sort ul",
+		items: "li.show "
+	});
+	$(".sortableList").sortable({
+		revert: true,
      //  connectWith: ".sort ul",
-    });
+ });
+	$('.popover').remove();
 
 
-    $('.popover').remove();
+	var listId = board.boardList.length+1;
+	var list = {
+		listId: listId,
+		listName: listName,
+                    items: [/*{
+                        itemId: "1",
+                        itemName: ""
+                    }*/]
 
-}
+                }
 
-function changeListName(e) {
+                board.boardList.push(list);
+                localStorage.setItem(board.boardId,JSON.stringify(board));
+                location.reload();
+            }
+
+            function changeListName(e) {
 
 
-    var inputs = $(".edit-list");
+            	var inputs = $(".edit-list");
     //if(listName != deleteListName){
-    for (var i = 0; i < inputs.length; i++) {
-        if (listName == inputs[i].innerHTML) {
-            $('#myModal').modal('hide');
-            return;
-        }
-    }
-    for (var i = 0; i < inputs.length; i++) {
-        if (inputs[i].innerHTML === deleteListName) {
-
-            inputs[i].innerHTML = listName;
-
-        }
-
-    }
-
-    $('#myModal').modal('hide');
-
-}
-
-function getParams() {
-    var idx = document.URL.indexOf('?');
-    /*var param ={};*/
-    /*if (idx != -1) {
-    	var pairs = document.URL.substring(idx+1, document.URL.length).split('&');
-    	for (var i=0; i<pairs.length; i++)
-    	{
-    		nameVal = pairs[i].split('=');
-    		params[nameVal[0]] = nameVal[1];
+    	for (var i = 0; i < inputs.length; i++) {
+    		if (listName == inputs[i].innerHTML) {
+    			$('#myModal').modal('hide');
+    			return;
+    		}
     	}
-    }
-    return param;*/
-    var params = {},
-        pairs = document.URL.split('?')
-        .pop()
-        .split('&');
+    	for (var i = 0; i < inputs.length; i++) {
+    		if (inputs[i].innerHTML === deleteListName) {
 
-    for (var i = 0, p; i < pairs.length; i++) {
-        p = pairs[i].split('=');
-        params[p[0]] = p[1];
+    			inputs[i].innerHTML = listName;
+
+    			for(var j=0;j<board.boardList.length;j++){
+    				if(board.boardList[j].listName === deleteListName){
+    					board.boardList[j].listName = listName;
+    				}
+    			}
+
+    		}
+
+    	}
+    	$('#myModal').modal('hide');
+
+    	localStorage.removeItem(board.boardId);
+    	localStorage.setItem(board.boardId,JSON.stringify(board));
+
     }
 
+    function getParams() {
+    	var params = {},
+    	pairs = document.URL.split('?')
+    	.pop()
+    	.split('&');
+
+    	for (var i = 0, p; i < pairs.length; i++) {
+    		p = pairs[i].split('=');
+    		params[p[0]] = p[1];
+    	}
+    //localStorage.setItem(params);
     return params;
 }
