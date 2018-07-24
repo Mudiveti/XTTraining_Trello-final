@@ -5,64 +5,45 @@ var deleteListName = '';
 var params = getParams();
 var board;
 $(document).ready(function() {
-    /*document.getElementById('dashBoardId').innerHTML = params.boardName;
-    var data = [{
-        "boardName": "Dashboard1",
-        "boardId": "Id1",
-        "itemList": [{
-                "itemListName": "List1",
-                "items": ["Item11", "Item12", "Item13"]
-            },
-            {
-                "itemListName": "List2",
-                "items": ["Item21", "Item22", "Item23"]
-            },
-            {
-                "itemListName": "List3",
-                "items": ["Item31", "Item32", "Item33"]
-            }
-        ]
-    }];
-    */
 
-    board = JSON.parse(localStorage.getItem(params.boardId));
-    document.getElementById('dashBoardId').innerHTML = board.boardName;
-    var ul1 = document.getElementById('ulId');
-    $.each(board.boardList, function(i, list) {
-    	var li1 = document.createElement("li");
-    	li1.className = 'card sort';
-    	li1.innerHTML = '<div type="button" class="btn text-left edit-list" data-toggle="modal" data-target="#myModal">' + list.listName + '</div><div class="modal fade" id="myModal"><div class="modal-dialog modal-sm"><div class="modal-content"><div class="modal-header"><h4 class="modal-title">Edit</h4><button type="button" class="close" data-dismiss="modal">&times;</button></div><div class="modal-body"><form class="form-inline" role="form"><input type="text" class="form-control mb-2 mr-sm-2" placeholder="name.." ></form></div><div class="modal-footer"><button type="button" class="btn btn-danger" data-dismiss="modal" onclick="deleteListName()">Delete</button><button type="button" class="btn btn-primary" onclick="changeListName(this)">Submit</button><button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button></div></div></div></div>';
-    	var ul2 = document.createElement("ul");
-    	ul2.className = 'list sortableList';
+	board = JSON.parse(localStorage.getItem(params.boardId));
+	document.getElementById('dashBoardId').innerHTML = board.boardName;
+	var ul1 = document.getElementById('ulId');
+	$.each(board.boardList, function(i, list) {
+		var li1 = document.createElement("li");
+		li1.className = 'card sort';
+		li1.innerHTML = '<div type="button" class="btn text-left edit-list" data-toggle="modal" data-target="#myModal">' + list.listName + '</div><div class="modal fade" id="myModal"><div class="modal-dialog modal-sm"><div class="modal-content"><div class="modal-header"><h4 class="modal-title">Edit</h4><button type="button" class="close" data-dismiss="modal">&times;</button></div><div class="modal-body"><form class="form-inline" role="form"><input type="text" class="form-control mb-2 mr-sm-2" placeholder="name.." ></form></div><div class="modal-footer"><button type="button" class="btn btn-danger" data-dismiss="modal" onclick="deleteListName()">Delete</button><button type="button" class="btn btn-primary" onclick="changeListName(this)">Submit</button><button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button></div></div></div></div>';
+		var ul2 = document.createElement("ul");
+		ul2.className = 'list sortableList';
 
-    	var li3 = document.createElement("li");
-    	li3.className='list-group-item';
-    	var i=0;
-    	var itemLength = list.items.length;
-    	if(itemLength === 0){
-    		var li2 = document.createElement("li");
-    		ul2.appendChild(li3);
-    	}
+		var li3 = document.createElement("li");
+		li3.className='list-group-item';
+		var i=0;
+		var itemLength = list.items.length;
+		if(itemLength === 0){
+			var li2 = document.createElement("li");
+			ul2.appendChild(li3);
+		}
 
-    	$.each(list.items, function(i, item) {
-    		var li2 = document.createElement("li");
+		$.each(list.items, function(i, item) {
+			var li2 = document.createElement("li");
 
-    		li2.className = 'btn bg-light text-left list_item_button show';
-    		li2.innerHTML = item.itemName;
-    		li2.id =item.itemId;
-    		if(i==0){
-    			ul2.appendChild(li3);
-    			i=1;
-    		}
+			li2.className = 'btn bg-light text-left list_item_button show';
+			li2.innerHTML = item.itemName;
+			li2.id =item.itemId;
+			if(i==0){
+				ul2.appendChild(li3);
+				i=1;
+			}
 
-    		ul2.appendChild(li2);
+			ul2.appendChild(li2);
 
-    	});
-    	/* ul2.appendChild(li3);*/
-    	li1.appendChild(ul2);
-    	li1.innerHTML = li1.innerHTML + '<div  class="itemInput"><input type="text" placeholder="list name..." class="itemname" maxlength="40"><button type="button" class="btn btn-primary ml-1 addbutton" onclick="return addItem(this)">Add</button></div>';
-    	ul1.appendChild(li1);
-    });
+		});
+		/* ul2.appendChild(li3);*/
+		li1.appendChild(ul2);
+		li1.innerHTML = li1.innerHTML + '<div  class="itemInput"><input type="text" placeholder="list name..." class="itemname" maxlength="40"><button type="button" class="btn btn-primary ml-1 addbutton" onclick="return addItem(this)">Add</button></div>';
+		ul1.appendChild(li1);
+	});
 
     //li droppable
     $('#ulId ul').sortable({
@@ -96,52 +77,37 @@ $(document).ready(function() {
     		localStorage.setItem(board.boardId,JSON.stringify(board));
 
 
-       /* for(var i = 0 ; i < $(".sort").length ; i++){
-        	var itemArray = [];
-        	var items = board.boardList[i].items;
-        	var li = $(".sort")[i].children[2].children;
-        	for(var j=0;j < li.length ; j++){
-        		for(var k=0;k<items.length;k++){
-                    if(li[j].innerHTML===items[k].itemName){
-                        itemArray.push(items[k]);
-                    }
-        		}
-        	}           
-           for(var k=0;k< itemArray.length;k++){   
-               board.boardList[i].items[k]=itemArray[k];  
-           }
+    		
+    		for(var i = 0 ; i < $(".sort").length ; i++){
+    			var itemArray = [];
+    			var items = board.boardList[i].items;
+    			var li = $(".sort")[i].children[2].children;
 
-       }*/
-       for(var i = 0 ; i < $(".sort").length ; i++){
-       	var itemArray = [];
-       	var items = board.boardList[i].items;
-       	var li = $(".sort")[i].children[2].children;
+    			for(var j=0;j < li.length ; j++){
+    				var name = li[j].innerHTML;
+    				if(name!=''){
+    					var id = li[j].id;
+    					var item ={
+    						itemId:id,
+    						itemName:name
+    					};
 
-       	for(var j=0;j < li.length ; j++){
-       		var name = li[j].innerHTML;
-       		if(name!=''){
-       			var id = li[j].id;
-       			var item ={
-       				itemId:id,
-       				itemName:name
-       			};
+    					itemArray.push(item);
+    				}
 
-       			itemArray.push(item);
-       		}
+    			}
+    			board.boardList[i].items = [];
+    			for(var k=0;k< itemArray.length;k++){   
+    				board.boardList[i].items[k]=itemArray[k];  
+    			}  
 
-       	}
-       	board.boardList[i].items = [];
-       	for(var k=0;k< itemArray.length;k++){   
-       		board.boardList[i].items[k]=itemArray[k];  
-       	}  
+    		}           
 
-       }           
+    		localStorage.removeItem(board.boardId);
+    		localStorage.setItem(board.boardId,JSON.stringify(board));
 
-       localStorage.removeItem(board.boardId);
-       localStorage.setItem(board.boardId,JSON.stringify(board));
-
-   }
-});
+    	}
+    });
 
 
     $( ".sortableList" ).droppable({
@@ -220,7 +186,7 @@ $(document).ready(function() {
     	for(var i=0;i<$('.sort').length;i++){
 
     		if($('.sort')[i].children[0].innerHTML === deleteListName){
-                 $('.sort')[i].className = 'd-none';
+    			$('.sort')[i].className = 'd-none';
     		}
     	}
     	var listArray = [];
@@ -231,8 +197,8 @@ $(document).ready(function() {
     	}
     	board.boardList=listArray;
 
-       localStorage.removeItem(board.boardId);
-       localStorage.setItem(board.boardId,JSON.stringify(board));
+    	localStorage.removeItem(board.boardId);
+    	localStorage.setItem(board.boardId,JSON.stringify(board));
 
     });
 });

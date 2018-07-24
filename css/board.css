@@ -62,7 +62,7 @@ li.show {
 }
 .edit-list{
 	font-size: larger;
-    font-family: sans-serif;
+	font-family: sans-serif;
 }
 
 .list{
@@ -86,28 +86,28 @@ li.show {
 
 /*.default-li{
 	list-style: none;
-}*/
+	}*/
 
-.list-group-item {
-     background-color: #C2C6BF;
-     border: none; 
-    }
+	.list-group-item {
+		background-color: #C2C6BF;
+		border: none; 
+	}
 
-.addbutton{
-	height: 33px;
+	.addbutton{
+		height: 33px;
 
-	margin-bottom: 3px;
-	padding-bottom: 29px;
-}
-.addList{
-	width: 219px;
-}
+		margin-bottom: 3px;
+		padding-bottom: 29px;
+	}
+	.addList{
+		width: 219px;
+	}
 
-.card{
-	position: inherit;
-}
+	.card{
+		position: inherit;
+	}
 
-@media (max-width: 640px)
-.card-columns {
-	column-count: 2;
-}
+	@media (max-width: 640px)
+	.card-columns {
+		column-count: 2;
+	}
